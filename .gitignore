@@ -1,0 +1,3551 @@
+local CoreGui = game:GetService("StarterGui")
+
+CoreGui:SetCore("SendNotification", {
+    Title = "培根脚本",
+    Text = "正在加载（反挂机已开启）",
+    Duration = 6, 
+})
+
+CoreGui:SetCore("SendNotification", {
+    Title = "培根脚本",
+    Text = "永久免费缝合",
+    Duration = 7, 
+})
+
+CoreGui:SetCore("SendNotification", {
+    Title = "培根脚本",
+    Text = "感谢您使用",
+    Duration = 8, 
+})
+
+print("反挂机开启")
+		local vu = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+		   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		   wait(1)
+		   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
+
+local LBLG = Instance.new("ScreenGui", getParent)
+local LBL = Instance.new("TextLabel", getParent)
+local player = game.Players.LocalPlayer
+
+LBLG.Name = "LBLG"
+LBLG.Parent = game.CoreGui
+LBLG.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+LBLG.Enabled = true
+LBL.Name = "LBL"
+LBL.Parent = LBLG
+LBL.BackgroundColor3 = Color3.new(1, 1, 1)
+LBL.BackgroundTransparency = 1
+LBL.BorderColor3 = Color3.new(0, 0, 0)
+LBL.Position = UDim2.new(0.75,0,0.010,0)
+LBL.Size = UDim2.new(0, 133, 0, 30)
+LBL.Font = Enum.Font.GothamSemibold
+LBL.Text = "TextLabel"
+LBL.TextColor3 = Color3.new(1, 1, 1)
+LBL.TextScaled = true
+LBL.TextSize = 14
+LBL.TextWrapped = true
+LBL.Visible = true
+
+local FpsLabel = LBL
+local Heartbeat = game:GetService("RunService").Heartbeat
+local LastIteration, Start
+local FrameUpdateTable = { }
+
+local function HeartbeatUpdate()
+  LastIteration = tick()
+  for Index = #FrameUpdateTable, 1, -1 do
+FrameUpdateTable[Index + 1] = (FrameUpdateTable[Index] >= LastIteration - 1) and FrameUpdateTable[Index] or nil
+  end
+  FrameUpdateTable[1] = LastIteration
+  local CurrentFPS = (tick() - Start >= 1 and #FrameUpdateTable) or (#FrameUpdateTable / (tick() - Start))
+CurrentFPS = CurrentFPS - CurrentFPS % 1
+  FpsLabel.Text = ("北京时间:"..os.date("%H").."时"..os.date("%M").."分"..os.date("%S"))
+end
+Start = tick()
+Heartbeat:Connect(HeartbeatUpdate)
+
+local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/v9Pdp6kx"))()
+local Window = OrionLib:MakeWindow({Name = "培根脚本", HidePremium = false, SaveConfig = true,IntroText = "roblox启动", ConfigFolder = "欢迎使用培根脚本"})
+
+local about = Window:MakeTab({
+    Name = "信息",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+about:AddParagraph("您的用户名:"," "..game.Players.LocalPlayer.Name.."")
+about:AddParagraph("您的注入器:"," "..identifyexecutor().."")
+about:AddParagraph("您当前服务器的ID"," "..game.GameId.."")
+
+local Tab = Window:MakeTab({
+	Name = "公告",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddParagraph("永久免费缝合脚本（群:938269389 b站:爱玩Roblox的小培根头呀）")
+
+Tab:AddParagraph("持续更新，如果发现不可用脚本请向作者反馈，圈钱似全家")
+
+Tab:AddParagraph("更新时间:7月6日，更新内容：巴掌模拟器新增功能")
+
+local Tab =Window:MakeTab({
+    Name = "快捷复制",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "复制QQ群",
+	Callback = function()
+     setclipboard("938269389")
+  	end
+})
+
+Tab:AddButton({
+	Name = "复制b站",
+	Callback = function()
+     setclipboard("爱玩Roblox的小培根头呀")
+  	end
+})
+
+local Tab = Window:MakeTab({
+  Name = "通用脚本",
+  Icon = "rbxassetid://4483345998",
+  PremiumOnly = false
+})
+
+Tab:AddTextbox({
+	Name = "移动速度",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end	 
+})
+
+ Tab:AddTextbox({
+	Name = "跳跃高度",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+	end	 
+})
+
+Tab:AddTextbox({
+	Name = "最大血量",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.MaxHealth = Value
+	end	 
+})
+
+Tab:AddTextbox({
+	Name = "墓前血量",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.Health = Value
+	end	 
+})
+
+Tab:AddButton({
+	Name = "回满血",
+	Callback = function()
+game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth 
+end
+})
+
+Tab:AddTextbox({
+	Name = "重力设置",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		game.Workspace.Gravity = Value
+	end
+})
+
+Tab:AddButton({
+	Name = "Acrylix（通用）",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/3dsonsuce/acrylix/main/Acrylix'))()
+end
+})
+
+Tab:AddButton({
+	Name = "修改玩家碰撞箱",
+	Callback = function()
+loadstring(game:HttpGet('https://pastebin.com/raw/JYFXjEVh'))()
+end
+})
+
+Tab:AddButton({
+	Name = "跑墙",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+end
+})
+
+Tab:AddToggle({
+	Name = "夜视",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+		    game.Lighting.Ambient = Color3.new(1, 1, 1)
+		else
+		    game.Lighting.Ambient = Color3.new(0, 0, 0)
+		end
+	end
+})
+
+Tab:AddButton({
+	Name = "通用ESP",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
+	end
+})
+
+Tab:AddButton({
+	Name = "癫(电)脑键盘",
+	Callback = function()
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+  	end    
+})
+
+Tab:AddToggle({
+	Name = "穿墙",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+		    Noclip = true
+		    Stepped = game.RunService.Stepped:Connect(function()
+			    if Noclip == true then
+				    for a, b in pairs(game.Workspace:GetChildren()) do
+                        if b.Name == game.Players.LocalPlayer.Name then
+                            for i, v in pairs(game.Workspace[game.Players.LocalPlayer.Name]:GetChildren()) do
+                                if v:IsA("BasePart") then
+                                    v.CanCollide = false
+                                end
+                            end
+                        end
+                    end
+			    else
+				    Stepped:Disconnect()
+			    end
+		    end)
+	    else
+		    Noclip = false
+	    end
+	end
+})
+
+Tab:AddButton({
+	Name = "甩飞",
+	Callback = function()
+     loadstring(game:HttpGet("https://pastebin.com/raw/GnvPVBEi"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "转圈",
+	Callback = function()
+loadstring(game:HttpGet('https://pastebin.com/raw/r97d7dS0', true))()
+end
+})
+
+Tab:AddButton({
+  Name = "回血加速",
+  Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/cbhlyy/lyycbh/main/nengliangtiao"))()
+  end
+})
+
+Tab:AddButton({
+    Name="重置人物",
+    Callback=function()
+        game.Players.LocalPlayer.Character.Humanoid.Health=0
+HumanDied = true
+    end
+})
+
+Tab:AddButton({
+	Name = "跟踪玩家",
+	Callback = function()
+      	loadstring(game:HttpGet("https://pastebin.com/raw/F9PNLcXk"))()
+  	end
+})
+
+Tab:AddButton({
+	Name = "infiniteyield",
+	Callback = function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end
+})    
+
+Tab:AddButton({
+	Name = "死亡笔记(单纯摆设，没有)",
+	Callback = function()
+--Made by Hirari_Tear, credits to expro for the GUI--
+
+local Handle = Instance.new('Part')
+
+local Mesh = Instance.new('SpecialMesh')
+
+local Death = Instance.new('Tool')
+
+Death.Name = "Death Note"
+
+Handle.Name = "Handle"
+
+Death.Parent = game.Players.LocalPlayer.Backpack
+
+Death.GripForward = Vector3.new(0.331, -0.766, 0.551)
+
+Death.GripPos = Vector3.new(-0.8, 0, -0.8)
+
+Death.GripRight = Vector3.new(-0.943, -0.297, 0.152)
+
+Death.GripUp = Vector3.new(-0.048, 0.57, 0.82)
+
+Death.ToolTip = "Kill your fucking rival"
+
+Handle.Parent = Death
+
+Mesh.Parent = Handle
+
+Mesh.MeshId = "http://www.roblox.com/asset/?id=1136139"
+
+Mesh.TextureId = "http://www.roblox.com/asset/?id=18276952"
+
+Mesh.Scale = Vector3.new(0.55, 0.174, 0.6)
+
+Handle.Rotation = Vector3.new(0,-90,0)
+
+Death.Equipped:connect(function(mouse)
+
+local Bounce = Enum.EasingStyle.Bounce
+
+local Quad = Enum.EasingStyle.Quad
+
+local Normal = Enum.EasingStyle.Linear
+
+
+
+local ScreenGui = Instance.new("ScreenGui", game.Players["LocalPlayer"].PlayerGui)
+
+ScreenGui.Name = "Death Note"
+
+
+
+local open = Instance.new("ImageButton", ScreenGui)
+
+open.Position = UDim2.new(1, -110, 1, 500)
+
+open.Size = UDim2.new(0, 100,0, 150)
+
+open.Image = "rbxassetid://18536731"
+
+open:TweenPosition(UDim2.new(1, -110, 1, -150), "In", Bounce, 0.8, true)
+
+
+
+local Note = Instance.new("Frame", ScreenGui)
+
+Note.Active = true
+
+Note.Position = UDim2.new(1, -321, 1, 500)
+
+Note.Size = UDim2.new(0, 320,0, 250)
+
+Note.Visible = false
+
+Note.Draggable = true
+
+
+
+open.MouseButton1Down:connect(function()
+
+open:TweenPosition(UDim2.new(open.Position.X.Scale,open.Position.X.Offset, 1, 500), "Out", Normal, 0.8, true)
+
+wait(0.30)
+
+open.Visible = false
+
+Note.Visible = true
+
+Note.Position = UDim2.new(1, -321, 1, 500)
+
+Note:TweenPosition(UDim2.new(1, -321, 1, -251), "In", Normal, 0.5, true)
+
+end)
+
+
+
+local bg = Instance.new("Frame", Note)
+
+bg.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+
+bg.Size = UDim2.new(0, 160,0, 250)
+
+bg.ZIndex = 2
+
+
+
+-- Background
+
+
+
+local close = Instance.new("TextButton", bg)
+
+close.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+close.BackgroundTransparency = 1
+
+close.Position = UDim2.new(0, 8,0, 10)
+
+close.Size = UDim2.new(0, 10,0, 10)
+
+close.ZIndex = 4
+
+close.Font = "Cartoon"
+
+close.Text = "X"
+
+close.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+close.TextSize = "17"
+
+
+
+close.MouseButton1Down:connect(function()
+
+Note:TweenPosition(UDim2.new(Note.Position.X.Scale,Note.Position.X.Offset,1, 500), "Out", Normal, 0.5, true)
+
+wait(0.30)
+
+Note.Visible = false
+
+open.Visible = true
+
+open:TweenPosition(UDim2.new(1, -110, 1, -150), "In", Normal, 0.8, true)
+
+end)
+
+
+
+local image1 = Instance.new("ImageLabel", bg)
+
+image1.BackgroundTransparency = 1
+
+image1.Size = UDim2.new(1, 0,1, 0)
+
+image1.ZIndex = 3
+
+image1.Image = "rbxassetid://18528551"
+
+
+
+local title = Instance.new("TextLabel", bg)
+
+title.BackgroundTransparency = 1
+
+title.Position = UDim2.new(0, 0,0, 30)
+
+title.Size = UDim2.new(1, 0,0, 30)
+
+title.ZIndex = 4
+
+title.Font = "Bodoni"
+
+title.Text = "DEATH NOTE"
+
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+title.TextSize = "18"
+
+
+
+local body = Instance.new("TextLabel", bg)
+
+body.BackgroundTransparency = 1
+
+body.Position = UDim2.new(0, 15,0, 65)
+
+body.Size = UDim2.new(0, 134,0, 40)
+
+body.ZIndex = 4
+
+body.Font = "Garamond"
+
+body.Text = "Type in somebody's name to kill them."
+
+body.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+body.TextSize = "19"
+
+body.TextWrapped = true
+
+body.TextXAlignment = "Left"
+
+body.TextYAlignment = "Top"
+
+
+
+local line = Instance.new("TextLabel", body)
+
+line.BackgroundTransparency = 1
+
+line.Position = UDim2.new(0, 0,0, 50)
+
+line.Size = UDim2.new(0, 130,0, 40)
+
+line.ZIndex = 4
+
+line.Font = "Garamond"
+
+line.Text = "________________"
+
+line.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+line.TextSize = "19"
+
+line.TextWrapped = true
+
+line.TextXAlignment = "Left"
+
+line.TextYAlignment = "Top"
+
+
+
+local text = Instance.new("TextLabel", body)
+
+text.BackgroundTransparency = 1
+
+text.Position = UDim2.new(0, 0,0, 100)
+
+text.Size = UDim2.new(0, 134,0, 40)
+
+text.ZIndex = 4
+
+text.Font = "Garamond"
+
+text.Text = "This was made by RcDZ."
+
+text.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+text.TextSize = "19"
+
+text.TextWrapped = true
+
+text.TextXAlignment = "Left"
+
+text.TextYAlignment = "Top"
+
+
+
+-- Page
+
+
+
+local page = Instance.new("Frame", Note)
+
+page.BackgroundColor3 = Color3.fromRGB(236, 236, 236)
+
+page.Position = UDim2.new(0, 160,0, 0)
+
+page.Size = UDim2.new(0, 160,0, 250)
+
+page.ZIndex = 2
+
+
+
+local list = Instance.new("TextBox", page)
+
+list.BackgroundTransparency = 1
+
+list.Position = UDim2.new(0, 25,0, 20)
+
+list.Size = UDim2.new(0.8, 5,0, 230)
+
+list.ZIndex = 4
+
+list.Font = "Antique"
+
+list.Text = ""
+
+list.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+list.TextSize = "23"
+
+list.TextWrapped = true
+
+list.TextXAlignment = "Left"
+
+list.TextYAlignment = "Top"
+
+
+
+local image2 = Instance.new("ImageLabel", page)
+
+image2.BackgroundTransparency = 1
+
+image2.Size = UDim2.new(1, 0,1, 0)
+
+image2.ZIndex = 3
+
+image2.Image = "rbxassetid://170279713"
+
+image2.Transparency = 0.2
+
+
+
+while true do
+
+repeat wait() until game.Workspace:FindFirstChild(list.Text)
+
+if game.Workspace[list.Text]:FindFirstChild("Humanoid") then
+
+game.Workspace[list.Text].Humanoid.PlatformStand = true
+
+game.Workspace[list.Text].Humanoid.Health = 0
+
+elseif game.Workspace[list.Text]:FindFirstChild("Zombie") then
+
+game.Workspace[list.Text].Zombie.PlatformStand = true
+
+game.Workspace[list.Text].Zombie.Health = 0
+
+end
+
+end
+
+end)
+
+Death.Unequipped:connect(function(mouse)
+
+game.Players.LocalPlayer.PlayerGui["Death Note"]:remove()
+
+end)
+--12333
+end
+})  
+
+Tab:AddButton({
+	Name = "伪名说话",
+	Callback = function()
+loadstring(game:HttpGet(('https://pastefy.ga/zCFEwaYq/raw'),true))()
+	end 
+})
+
+Tab:AddButton({
+	Name = "人物无敌",
+	Callback = function()
+     loadstring(game:HttpGet('https://pastebin.com/raw/H3RLCWWZ'))()
+	end    
+})
+
+Tab:AddButton({
+	Name = "无敌",
+	Callback = function()
+local lp = game:GetService "Players".LocalPlayer
+if lp.Character:FindFirstChild "Head" then
+    local char = lp.Character
+    char.Archivable = true
+    local new = char:Clone()
+    new.Parent = workspace
+    lp.Character = new
+    wait(2)
+    local oldhum = char:FindFirstChildWhichIsA "Humanoid"
+    local newhum = oldhum:Clone()
+    newhum.Parent = char
+    newhum.RequiresNeck = false
+    oldhum.Parent = nil
+    wait(2)
+    lp.Character = char
+    new:Destroy()
+    wait(1)
+    newhum:GetPropertyChangedSignal("Health"):Connect(
+        function()
+            if newhum.Health <= 0 then
+                oldhum.Parent = lp.Character
+                wait(1)
+                oldhum:Destroy()
+            end
+        end)
+    workspace.CurrentCamera.CameraSubject = char
+    if char:FindFirstChild "Animate" then
+        char.Animate.Disabled = true
+        wait(.1)
+        char.Animate.Disabled = false
+    end
+    lp.Character:FindFirstChild "Head":Destroy()
+end
+end
+})
+
+Tab:AddButton({
+	Name = "无限跳",
+    Default = false,
+	Callback = function(Value)
+loadstring(game:HttpGet("https://pastebin.com/raw/V5PQy3y0", true))()
+	end
+})
+
+Tab:AddButton({
+	Name = "踏空行走",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float'))()
+	end
+})
+
+Tab:AddButton({
+	Name = "飞车",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/MHE1cbWF"))()
+	end
+})
+Tab:AddButton({
+	Name = "FPS(变流畅)",
+	Callback = function()
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/FPS-X-GUI/main/FPS_X.lua"))()
+  	end    
+})
+
+Tab:AddButton({
+  Name = "光影1",
+  Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/arzRCgwS"))()
+  end
+})
+
+Tab:AddButton({
+  Name = "光影2",
+  Default = false,
+  Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MZEEN2424/Graphics/main/Graphics.xml"))()
+  end
+})
+
+Tab:AddButton({
+	Name = "超高画质",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/jHBfJYmS"))()
+end
+})    
+
+Tab:AddButton({
+  Name = "旋转",
+  Callback = function()
+    loadstring(game:HttpGet('https://pastebin.com/raw/r97d7dS0', true))()
+  end
+})
+
+Tab:AddButton({
+	Name = "转起来",
+	Callback = function()
+      	loadstring(game:HttpGet('https://pastebin.com/raw/r97d7dS0', true))()
+  	end
+})
+
+Tab:AddButton({
+	Name = "玩家进入提示",
+	Callback = function()
+      	loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))()
+  	end
+})
+
+Tab:AddButton({
+	Name = "飞行",
+	Callback = function()
+local main = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local up = Instance.new("TextButton")
+local down = Instance.new("TextButton")
+local onof = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local plus = Instance.new("TextButton")
+local speed = Instance.new("TextLabel")
+local mine = Instance.new("TextButton")
+local closebutton = Instance.new("TextButton")
+local mini = Instance.new("TextButton")
+local mini2 = Instance.new("TextButton")
+
+main.Name = "main"
+main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+main.ResetOnSpawn = false
+
+Frame.Parent = main
+Frame.BackgroundColor3 = Color3.fromRGB(163, 255, 137)
+Frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
+Frame.Position = UDim2.new(0.100320168, 0, 0.379746825, 0)
+Frame.Size = UDim2.new(0, 190, 0, 57)
+
+up.Name = "up"
+up.Parent = Frame
+up.BackgroundColor3 = Color3.fromRGB(79, 255, 152)
+up.Size = UDim2.new(0, 44, 0, 28)
+up.Font = Enum.Font.SourceSans
+up.Text = "上"
+up.TextColor3 = Color3.fromRGB(0, 0, 0)
+up.TextSize = 14.000
+
+down.Name = "down"
+down.Parent = Frame
+down.BackgroundColor3 = Color3.fromRGB(215, 255, 121)
+down.Position = UDim2.new(0, 0, 0.491228074, 0)
+down.Size = UDim2.new(0, 44, 0, 28)
+down.Font = Enum.Font.SourceSans
+down.Text = "下"
+down.TextColor3 = Color3.fromRGB(0, 0, 0)
+down.TextSize = 14.000
+
+onof.Name = "onof"
+onof.Parent = Frame
+onof.BackgroundColor3 = Color3.fromRGB(255, 249, 74)
+onof.Position = UDim2.new(0.702823281, 0, 0.491228074, 0)
+onof.Size = UDim2.new(0, 56, 0, 28)
+onof.Font = Enum.Font.SourceSans
+onof.Text = "飞行"
+onof.TextColor3 = Color3.fromRGB(0, 0, 0)
+onof.TextSize = 14.000
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(242, 60, 255)
+TextLabel.Position = UDim2.new(0.469327301, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 100, 0, 28)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "培根飞行"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+plus.Name = "plus"
+plus.Parent = Frame
+plus.BackgroundColor3 = Color3.fromRGB(133, 145, 255)
+plus.Position = UDim2.new(0.231578946, 0, 0, 0)
+plus.Size = UDim2.new(0, 45, 0, 28)
+plus.Font = Enum.Font.SourceSans
+plus.Text = "+"
+plus.TextColor3 = Color3.fromRGB(0, 0, 0)
+plus.TextScaled = true
+plus.TextSize = 14.000
+plus.TextWrapped = true
+
+speed.Name = "speed"
+speed.Parent = Frame
+speed.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+speed.Position = UDim2.new(0.468421042, 0, 0.491228074, 0)
+speed.Size = UDim2.new(0, 44, 0, 28)
+speed.Font = Enum.Font.SourceSans
+speed.Text = "1"
+speed.TextColor3 = Color3.fromRGB(0, 0, 0)
+speed.TextScaled = true
+speed.TextSize = 14.000
+speed.TextWrapped = true
+
+mine.Name = "mine"
+mine.Parent = Frame
+mine.BackgroundColor3 = Color3.fromRGB(123, 255, 247)
+mine.Position = UDim2.new(0.231578946, 0, 0.491228074, 0)
+mine.Size = UDim2.new(0, 45, 0, 29)
+mine.Font = Enum.Font.SourceSans
+mine.Text = "-"
+mine.TextColor3 = Color3.fromRGB(0, 0, 0)
+mine.TextScaled = true
+mine.TextSize = 14.000
+mine.TextWrapped = true
+
+closebutton.Name = "Close"
+closebutton.Parent = main.Frame
+closebutton.BackgroundColor3 = Color3.fromRGB(225, 25, 0)
+closebutton.Font = "SourceSans"
+closebutton.Size = UDim2.new(0, 45, 0, 28)
+closebutton.Text = "关闭"
+closebutton.TextSize = 30
+closebutton.Position =  UDim2.new(0, 0, -1, 27)
+
+mini.Name = "minimize"
+mini.Parent = main.Frame
+mini.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+mini.Font = "SourceSans"
+mini.Size = UDim2.new(0, 45, 0, 28)
+mini.Text = "隐藏"
+mini.TextSize = 40
+mini.Position = UDim2.new(0, 44, -1, 27)
+
+mini2.Name = "minimize2"
+mini2.Parent = main.Frame
+mini2.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+mini2.Font = "SourceSans"
+mini2.Size = UDim2.new(0, 45, 0, 28)
+mini2.Text = "+"
+mini2.TextSize = 40
+mini2.Position = UDim2.new(0, 44, -1, 57)
+mini2.Visible = false
+
+speeds = 1
+
+local speaker = game:GetService("Players").LocalPlayer
+
+local chr = game.Players.LocalPlayer.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+
+nowe = false
+
+game:GetService("StarterGui"):SetCore("SendNotification", { 
+	Title = "Fly GUI V3";
+	Text = "By me_ozone and Quandale The Dinglish XII#3550";
+	Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
+Duration = 5;
+
+Frame.Active = true -- main = gui
+Frame.Draggable = true
+
+onof.MouseButton1Down:connect(function()
+
+	if nowe == true then
+		nowe = false
+
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+	else 
+		nowe = true
+
+
+
+		for i = 1, speeds do
+			spawn(function()
+
+				local hb = game:GetService("RunService").Heartbeat	
+
+
+				tpwalking = true
+				local chr = game.Players.LocalPlayer.Character
+				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+
+			end)
+		end
+		game.Players.LocalPlayer.Character.Animate.Disabled = true
+		local Char = game.Players.LocalPlayer.Character
+		local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+		for i,v in next, Hum:GetPlayingAnimationTracks() do
+			v:AdjustSpeed(0)
+		end
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+	end
+
+
+
+
+	if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+
+
+
+		local plr = game.Players.LocalPlayer
+		local torso = plr.Character.Torso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", torso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = torso.CFrame
+		local bv = Instance.new("BodyVelocity", torso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			game:GetService("RunService").RenderStepped:Wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+			--	game.Players.LocalPlayer.Character.Animate.Disabled = true
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+
+
+
+
+	else
+		local plr = game.Players.LocalPlayer
+		local UpperTorso = plr.Character.UpperTorso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", UpperTorso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = UpperTorso.CFrame
+		local bv = Instance.new("BodyVelocity", UpperTorso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+
+
+
+	end
+
+
+
+
+
+end)
+
+local tis
+
+up.MouseButton1Down:connect(function()
+	tis = up.MouseEnter:connect(function()
+		while tis do
+			wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
+		end
+	end)
+end)
+
+up.MouseLeave:connect(function()
+	if tis then
+		tis:Disconnect()
+		tis = nil
+	end
+end)
+
+local dis
+
+down.MouseButton1Down:connect(function()
+	dis = down.MouseEnter:connect(function()
+		while dis do
+			wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
+		end
+	end)
+end)
+
+down.MouseLeave:connect(function()
+	if dis then
+		dis:Disconnect()
+		dis = nil
+	end
+end)
+
+
+game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
+	wait(0.7)
+	game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+	game.Players.LocalPlayer.Character.Animate.Disabled = false
+
+end)
+
+
+plus.MouseButton1Down:connect(function()
+	speeds = speeds + 1
+	speed.Text = speeds
+	if nowe == true then
+
+
+		tpwalking = false
+		for i = 1, speeds do
+			spawn(function()
+
+				local hb = game:GetService("RunService").Heartbeat	
+
+
+				tpwalking = true
+				local chr = game.Players.LocalPlayer.Character
+				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+
+			end)
+		end
+	end
+end)
+mine.MouseButton1Down:connect(function()
+	if speeds == 1 then
+		speed.Text = 'cannot be less than 1'
+		wait(1)
+		speed.Text = speeds
+	else
+		speeds = speeds - 1
+		speed.Text = speeds
+		if nowe == true then
+			tpwalking = false
+			for i = 1, speeds do
+				spawn(function()
+
+					local hb = game:GetService("RunService").Heartbeat	
+
+
+					tpwalking = true
+					local chr = game.Players.LocalPlayer.Character
+					local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+					while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+						if hum.MoveDirection.Magnitude > 0 then
+							chr:TranslateBy(hum.MoveDirection)
+						end
+					end
+
+				end)
+			end
+		end
+	end
+end)
+
+closebutton.MouseButton1Click:Connect(function()
+	main:Destroy()
+end)
+
+mini.MouseButton1Click:Connect(function()
+	up.Visible = false
+	down.Visible = false
+	onof.Visible = false
+	plus.Visible = false
+	speed.Visible = false
+	mine.Visible = false
+	mini.Visible = false
+	mini2.Visible = true
+	main.Frame.BackgroundTransparency = 1
+	closebutton.Position =  UDim2.new(0, 0, -1, 57)
+end)
+
+mini2.MouseButton1Click:Connect(function()
+	up.Visible = true
+	down.Visible = true
+	onof.Visible = true
+	plus.Visible = true
+	speed.Visible = true
+	mine.Visible = true
+	mini.Visible = true
+	mini2.Visible = false
+	main.Frame.BackgroundTransparency = 0 
+	closebutton.Position =  UDim2.new(0, 0, -1, 27)
+end)
+end
+}) 
+
+Tab:AddButton({
+	Name = "h小鬼必备",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/bzmhRgKL"))();
+end
+})    
+
+Tab:AddButton({
+	Name = "子弹追踪",
+	Callback = function()
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
+local w = library:CreateWindow("New Combat#1") -- Creates the window
+
+local b = w:CreateFolder("New Combat#1") -- Creates the folder(U will put here your buttons,etc)
+
+b:Label("New Combat",{
+    TextSize = 25; -- Self Explaining
+    TextColor = Color3.fromRGB(255,255,255); -- Self Explaining
+    BgColor = Color3.fromRGB(69,69,69); -- Self Explaining
+    
+}) 
+
+b:Button("Admin",function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife'),true))()
+end)
+
+b:Button("AimbotHead",function()
+    local Players = game.Players
+local LocalPlayer = Players.LocalPlayer
+local GetPlayers = Players.GetPlayers
+local Camera = workspace.CurrentCamera
+local WTSP = Camera.WorldToScreenPoint
+local FindFirstChild = game.FindFirstChild
+local Vector2_new = Vector2.new
+local Mouse = LocalPlayer.GetMouse(LocalPlayer)
+function ClosestChar()
+    local Max, Close = math.huge
+    for I,V in pairs(GetPlayers(Players)) do
+        if V ~= LocalPlayer and V.Team ~= LocalPlayer.Team and V.Character then
+            local Head = FindFirstChild(V.Character, "Head")
+            if Head then
+                local Pos, OnScreen = WTSP(Camera, Head.Position)
+                if OnScreen then
+                    local Dist = (Vector2_new(Pos.X, Pos.Y) - Vector2_new(Mouse.X, Mouse.Y)).Magnitude
+                    if Dist < Max then
+                        Max = Dist
+                        Close = V.Character
+                    end
+                end
+            end
+        end
+    end
+    return Close
+end
+
+local MT = getrawmetatable(game)
+local __namecall = MT.__namecall
+setreadonly(MT, false)
+MT.__namecall = newcclosure(function(self, ...)
+    local Method = getnamecallmethod()
+    if Method == "FindPartOnRay" and not checkcaller() and tostring(getfenv(0).script) == "GunInterface" then
+        local Character = ClosestChar()
+        if Character then
+            return Character.Head, Character.Head.Position
+        end
+    end
+
+    return __namecall(self, ...)
+end)
+setreadonly(MT, true)
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+ 
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Subscribe To AlexScripterUnfound";
+    Text = "Made by AlexScripterUnfounded"; -- what the text says (ofc)
+    Duration = 20;
+})
+wait(1)
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Yeah Boy";
+    Text = "Enjoy"; -- what the text says (ofc)
+    Duration = 20;
+})
+
+
+end)
+
+b:Button("torsoAimbot",function()
+    local Players = game.Players
+local LocalPlayer = Players.LocalPlayer
+local GetPlayers = Players.GetPlayers
+local Camera = workspace.CurrentCamera
+local WTSP = Camera.WorldToScreenPoint
+local FindFirstChild = game.FindFirstChild
+local Vector2_new = Vector2.new
+local Mouse = LocalPlayer.GetMouse(LocalPlayer)
+function ClosestChar()
+    local Max, Close = math.huge
+    for I,V in pairs(GetPlayers(Players)) do
+        if V ~= LocalPlayer and V.Team ~= LocalPlayer.Team and V.Character then
+            local Torso = FindFirstChild(V.Character, "Torso")
+            if Torso then
+                local Pos, OnScreen = WTSP(Camera, Torso.Position)
+                if OnScreen then
+                    local Dist = (Vector2_new(Pos.X, Pos.Y) - Vector2_new(Mouse.X, Mouse.Y)).Magnitude
+                    if Dist < Max then
+                        Max = Dist
+                        Close = V.Character
+                    end
+                end
+            end
+        end
+    end
+    return Close
+end
+
+local MT = getrawmetatable(game)
+local __namecall = MT.__namecall
+setreadonly(MT, false)
+MT.__namecall = newcclosure(function(self, ...)
+    local Method = getnamecallmethod()
+    if Method == "FindPartOnRay" and not checkcaller() and tostring(getfenv(0).script) == "GunInterface" then
+        local Character = ClosestChar()
+        if Character then
+            return Character.Torso, Character.Torso.Position
+        end
+    end
+
+    return __namecall(self, ...)
+end)
+setreadonly(MT, true)
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+ 
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Subscribe To AlexScripterUnfounded";
+    Text = "Made by AlexScripterUnfounded"; -- what the text says (ofc)
+    Duration = 20;
+})
+wait(1)
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Yeah Boy";
+    Text = "Enjoy"; -- what the text says (ofc)
+    Duration = 20;
+})
+
+
+end)
+
+b:Button("Keyboard",function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/manimcool21/Keyboard-FE/main/Protected%20(3).lua'),true))()
+end)
+
+b:Button("Nihilize",function()
+    -- Gui to Lua
+-- Version: 3.2
+-- Script Created by Nihilize
+
+FavoriteColor = Color3.fromRGB(0, 0, 255) --(Red, Green, Blue) from 0 to 255
+
+local function getGuns()
+	--Remington870--------------------------------------------
+	game.Workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver["Remington 870"].ITEMPICKUP) --Remington 870
+	----------------------------------------------------------
+
+	--M4A1----------------------------------------------------
+	if (game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 96651)) then
+		game.Workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver["M4A1"].ITEMPICKUP)
+	else --If you don't have gamepass for M4A1 then you will get the converted AK-47
+		game.Workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver["AK-47"].ITEMPICKUP) 
+		require(game.Players.LocalPlayer.Backpack:FindFirstChild("AK-47"):FindFirstChild("GunStates"))["FireRate"] = 0.09
+	end
+	----------------------------------------------------------
+	
+	--AK-47---------------------------------------------------
+	if (game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 96651)) then
+		--If you don't have gamepass for M4A1 then you will not get this AK-47
+		game.Workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver["AK-47"].ITEMPICKUP)
+	end
+	----------------------------------------------------------
+	
+	--M9---------------------------------------------------
+	game.Workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver["M9"].ITEMPICKUP)
+	if game.Players.LocalPlayer:FindFirstChild("M9") then
+		game.Players.LocalPlayer:FindFirstChild("M9").Parent = game.Players.LocalPlayer.Backpack
+	end
+	-------------------------------------------------------
+end
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local ObGuns = Instance.new("TextButton")
+local NexusTP = Instance.new("TextButton")
+local BackTP = Instance.new("TextButton")
+local BeGuardF = Instance.new("TextButton")
+local BeInmate = Instance.new("TextButton")
+local BeCriminal = Instance.new("TextButton")
+local BeNeutral = Instance.new("TextButton")
+local YardTP = Instance.new("TextButton")
+local CafeTP = Instance.new("TextButton")
+local Refresh = Instance.new("TextButton")
+local Respawn = Instance.new("TextButton")
+local BeGuard = Instance.new("TextButton")
+local CellsTP = Instance.new("TextButton")
+local Lock = Instance.new("TextButton")
+local ArmoryTP = Instance.new("TextButton")
+local ChatEnabled = true
+local BubblesEnabled = true
+
+--Properties:
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = FavoriteColor
+Frame.BorderSizePixel = 3
+Frame.Position = UDim2.new(0.8, 0, 0.1, 0)
+Frame.Size = UDim2.new(0, 200, 0, 300)
+Frame.BorderMode = "Inset"
+
+Title.Name = "Title"
+Title.Parent = Frame
+Title.AnchorPoint = Vector2.new(0.5, 0.5)
+Title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title.BackgroundTransparency = 1.000
+Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Title.Position = UDim2.new(0.5, 0, 0.0700000003, 0)
+Title.Size = UDim2.new(0, 180, 0, 50)
+Title.Font = Enum.Font.SourceSans
+Title.Text = "Nihilize H4X"
+Title.TextColor3 = FavoriteColor
+Title.TextScaled = true
+Title.TextSize = 30.000
+Title.TextWrapped = true
+
+ObGuns.Name = "ObGuns"
+ObGuns.Parent = Frame
+ObGuns.AnchorPoint = Vector2.new(0.5, 0.5)
+ObGuns.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ObGuns.BorderColor3 = FavoriteColor
+ObGuns.BorderSizePixel = 2
+ObGuns.Position = UDim2.new(0.275000006, 0, 0.200000003, 0)
+ObGuns.Size = UDim2.new(0, 73, 0, 32)
+ObGuns.Font = Enum.Font.SourceSans
+ObGuns.Text = "Guns"
+ObGuns.TextColor3 = FavoriteColor
+ObGuns.TextSize = 25.000
+ObGuns.TextWrapped = true
+ObGuns.BorderMode = "Inset"
+
+NexusTP.Name = "NexusTP"
+NexusTP.Parent = Frame
+NexusTP.AnchorPoint = Vector2.new(0.5, 0.5)
+NexusTP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NexusTP.BorderColor3 = FavoriteColor
+NexusTP.BorderSizePixel = 2
+NexusTP.Position = UDim2.new(0.275000006, 0, 0.340000004, 0)
+NexusTP.Size = UDim2.new(0, 73, 0, 32)
+NexusTP.Font = Enum.Font.SourceSans
+NexusTP.Text = "Nexus"
+NexusTP.TextColor3 = FavoriteColor
+NexusTP.TextSize = 25.000
+NexusTP.TextWrapped = true
+NexusTP.BorderMode = "Inset"
+
+BackTP.Name = "BackTP"
+BackTP.Parent = Frame
+BackTP.AnchorPoint = Vector2.new(0.5, 0.5)
+BackTP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+BackTP.BorderColor3 = FavoriteColor
+BackTP.BorderSizePixel = 2
+BackTP.Position = UDim2.new(0.275000006, 0, 0.479999989, 0)
+BackTP.Size = UDim2.new(0, 73, 0, 32)
+BackTP.Font = Enum.Font.SourceSans
+BackTP.Text = "Back"
+BackTP.TextColor3 = FavoriteColor
+BackTP.TextSize = 25.000
+BackTP.TextWrapped = true
+BackTP.BorderMode = "Inset"
+
+BeGuardF.Name = "BeGuardF"
+BeGuardF.Parent = Frame
+BeGuardF.AnchorPoint = Vector2.new(0.5, 0.5)
+BeGuardF.BackgroundColor3 = Color3.fromRGB(9, 0, 77)
+BeGuardF.BorderColor3 = FavoriteColor
+BeGuardF.BorderSizePixel = 2
+BeGuardF.Position = UDim2.new(0.680000007, 0, 0.224999994, 0)
+BeGuardF.Size = UDim2.new(0, 20, 0, 17)
+BeGuardF.SizeConstraint = Enum.SizeConstraint.RelativeXX
+BeGuardF.ZIndex = 3
+BeGuardF.Font = Enum.Font.SourceSans
+BeGuardF.Text = ""
+BeGuardF.TextColor3 = FavoriteColor
+BeGuardF.TextSize = 25.000
+BeGuardF.TextWrapped = true
+BeGuardF.BorderMode = "Inset"
+
+BeInmate.Name = "BeInmate"
+BeInmate.Parent = Frame
+BeInmate.AnchorPoint = Vector2.new(0.5, 0.5)
+BeInmate.BackgroundColor3 = Color3.fromRGB(92, 40, 1)
+BeInmate.BorderColor3 = FavoriteColor
+BeInmate.BorderSizePixel = 2
+BeInmate.Position = UDim2.new(0.589999974, 0, 0.200000003, 0)
+BeInmate.Size = UDim2.new(0, 20, 0, 32)
+BeInmate.ZIndex = 2
+BeInmate.Font = Enum.Font.SourceSans
+BeInmate.Text = ""
+BeInmate.TextColor3 = FavoriteColor
+BeInmate.TextSize = 25.000
+BeInmate.TextWrapped = true
+BeInmate.BorderMode = "Inset"
+
+BeCriminal.Name = "BeCriminal"
+BeCriminal.Parent = Frame
+BeCriminal.AnchorPoint = Vector2.new(0.5, 0.5)
+BeCriminal.BackgroundColor3 = Color3.fromRGB(96, 0, 1)
+BeCriminal.BorderColor3 = FavoriteColor
+BeCriminal.BorderSizePixel = 2
+BeCriminal.Position = UDim2.new(0.769999981, 0, 0.200000003, 0)
+BeCriminal.Size = UDim2.new(0, 20, 0, 32)
+BeCriminal.ZIndex = 2
+BeCriminal.Font = Enum.Font.SourceSans
+BeCriminal.Text = ""
+BeCriminal.TextColor3 = FavoriteColor
+BeCriminal.TextSize = 25.000
+BeCriminal.TextWrapped = true
+BeCriminal.BorderMode = "Inset"
+
+BeNeutral.Name = "BeNeutral"
+BeNeutral.Parent = Frame
+BeNeutral.AnchorPoint = Vector2.new(0.5, 0.5)
+BeNeutral.BackgroundColor3 = Color3.fromRGB(140, 140, 140)
+BeNeutral.BorderColor3 = FavoriteColor
+BeNeutral.BorderSizePixel = 2
+BeNeutral.Position = UDim2.new(0.860000014, 0, 0.200000003, 0)
+BeNeutral.Size = UDim2.new(0, 20, 0, 32)
+BeNeutral.ZIndex = 2
+BeNeutral.Font = Enum.Font.SourceSans
+BeNeutral.Text = ""
+BeNeutral.TextColor3 = FavoriteColor
+BeNeutral.TextSize = 25.000
+BeNeutral.TextWrapped = true
+BeNeutral.BorderMode = "Inset"
+
+YardTP.Name = "YardTP"
+YardTP.Parent = Frame
+YardTP.AnchorPoint = Vector2.new(0.5, 0.5)
+YardTP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+YardTP.BorderColor3 = FavoriteColor
+YardTP.BorderSizePixel = 2
+YardTP.Position = UDim2.new(0.725000024, 0, 0.340000004, 0)
+YardTP.Size = UDim2.new(0, 73, 0, 32)
+YardTP.Font = Enum.Font.SourceSans
+YardTP.Text = "Yard"
+YardTP.TextColor3 = FavoriteColor
+YardTP.TextSize = 25.000
+YardTP.TextWrapped = true
+YardTP.BorderMode = "Inset"
+
+CafeTP.Name = "CafeTP"
+CafeTP.Parent = Frame
+CafeTP.AnchorPoint = Vector2.new(0.5, 0.5)
+CafeTP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CafeTP.BorderColor3 = FavoriteColor
+CafeTP.BorderSizePixel = 2
+CafeTP.Position = UDim2.new(0.725000024, 0, 0.479999989, 0)
+CafeTP.Size = UDim2.new(0, 73, 0, 32)
+CafeTP.Font = Enum.Font.SourceSans
+CafeTP.Text = "Cafe"
+CafeTP.TextColor3 = FavoriteColor
+CafeTP.TextSize = 25.000
+CafeTP.TextWrapped = true
+CafeTP.BorderMode = "Inset"
+
+Refresh.Name = "Refresh"
+Refresh.Parent = Frame
+Refresh.AnchorPoint = Vector2.new(0.5, 0.5)
+Refresh.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Refresh.BorderColor3 = FavoriteColor
+Refresh.BorderSizePixel = 2
+Refresh.Position = UDim2.new(0.275000006, 0, 0.899999976, 0)
+Refresh.Size = UDim2.new(0, 73, 0, 32)
+Refresh.Font = Enum.Font.SourceSans
+Refresh.Text = "Re"
+Refresh.TextColor3 = FavoriteColor
+Refresh.TextSize = 25.000
+Refresh.TextWrapped = true
+Refresh.BorderMode = "Inset"
+
+Respawn.Name = "Respawn"
+Respawn.Parent = Frame
+Respawn.Active = false
+Respawn.AnchorPoint = Vector2.new(0.5, 0.5)
+Respawn.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Respawn.BorderColor3 = FavoriteColor
+Respawn.BorderSizePixel = 2
+Respawn.Position = UDim2.new(0.725000024, 0, 0.899999976, 0)
+Respawn.Size = UDim2.new(0, 73, 0, 32)
+Respawn.Font = Enum.Font.SourceSans
+Respawn.Text = "Spawn"
+Respawn.TextColor3 = FavoriteColor
+Respawn.TextSize = 25.000
+Respawn.TextWrapped = true
+Respawn.BorderMode = "Inset"
+
+BeGuard.Name = "BeGuard"
+BeGuard.Parent = Frame
+BeGuard.AnchorPoint = Vector2.new(0.5, 0.5)
+BeGuard.BackgroundColor3 = Color3.fromRGB(9, 0, 77)
+BeGuard.BorderColor3 = FavoriteColor
+BeGuard.BorderSizePixel = 2
+BeGuard.Position = UDim2.new(0.680000007, 0, 0.174999997, 0)
+BeGuard.Size = UDim2.new(0, 20, 0, 17)
+BeGuard.SizeConstraint = Enum.SizeConstraint.RelativeXX
+BeGuard.ZIndex = 3
+BeGuard.Font = Enum.Font.SourceSans
+BeGuard.Text = ""
+BeGuard.TextColor3 = FavoriteColor
+BeGuard.TextSize = 25.000
+BeGuard.TextWrapped = true
+BeGuard.BorderMode = "Inset"
+
+CellsTP.Name = "CellsTP"
+CellsTP.Parent = Frame
+CellsTP.AnchorPoint = Vector2.new(0.5, 0.5)
+CellsTP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CellsTP.BorderColor3 = FavoriteColor
+CellsTP.BorderSizePixel = 2
+CellsTP.Position = UDim2.new(0.725000024, 0, 0.620000005, 0)
+CellsTP.Size = UDim2.new(0, 73, 0, 32)
+CellsTP.Font = Enum.Font.SourceSans
+CellsTP.Text = "Cells"
+CellsTP.TextColor3 = FavoriteColor
+CellsTP.TextSize = 25.000
+CellsTP.TextWrapped = true
+CellsTP.BorderMode = "Inset"
+
+Lock.Name = "Lock"
+Lock.Parent = Frame
+Lock.AnchorPoint = Vector2.new(0.5, 0.5)
+Lock.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Lock.BorderColor3 = FavoriteColor
+Lock.BorderSizePixel = 2
+Lock.Position = UDim2.new(0.5, 0, 0.75999999, 0)
+Lock.Size = UDim2.new(0, 156, 0, 32)
+Lock.Font = Enum.Font.SourceSans
+Lock.Text = "Lock"
+Lock.TextColor3 = FavoriteColor
+Lock.TextSize = 25.000
+Lock.TextWrapped = true
+Lock.BorderMode = "Inset"
+
+ArmoryTP.Name = "ArmoryTP"
+ArmoryTP.Parent = Frame
+ArmoryTP.AnchorPoint = Vector2.new(0.5, 0.5)
+ArmoryTP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ArmoryTP.BorderColor3 = FavoriteColor
+ArmoryTP.BorderSizePixel = 2
+ArmoryTP.Position = UDim2.new(0.275000006, 0, 0.620000005, 0)
+ArmoryTP.Size = UDim2.new(0, 73, 0, 32)
+ArmoryTP.Font = Enum.Font.SourceSans
+ArmoryTP.Text = "Armory"
+ArmoryTP.TextColor3 = FavoriteColor
+ArmoryTP.TextSize = 25.000
+ArmoryTP.TextWrapped = true
+ArmoryTP.BorderMode = "Inset"
+
+ArmoryTP.MouseButton1Down:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(798,99,2260)
+end)
+
+BackTP.MouseButton1Down:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(980, 101, 2327)
+end)
+
+BeCriminal.MouseButton1Down:connect(function()
+	local lastPos = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").position
+	LCS = game.Workspace["Criminals Spawn"].SpawnLocation
+	LCS.CanCollide = false
+	LCS.Size = Vector3.new(51.05, 24.12, 54.76)
+	LCS.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+	LCS.Transparency = 1
+	wait(0.5)
+	LCS.CFrame = CFrame.new(-920.510803, 92.2271957, 2138.27002, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+	LCS.Size = Vector3.new(6, 0.2, 6)
+	LCS.Transparency = 0
+	wait()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(lastPos)
+end)
+
+BeGuard.MouseButton1Down:connect(function()
+	Workspace.Remote.TeamEvent:FireServer("Bright blue")
+end)
+
+BeGuardF.MouseButton1Down:connect(function()
+	local lastPos = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").position
+	workspace.Remote.loadchar:InvokeServer("", "Bright blue")
+	wait()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(lastPos)
+end)
+
+BeInmate.MouseButton1Down:connect(function()
+	Workspace.Remote.TeamEvent:FireServer("Bright orange")
+end)
+
+BeNeutral.MouseButton1Down:connect(function()
+	Workspace.Remote.TeamEvent:FireServer("Medium stone grey")
+end)
+
+CafeTP.MouseButton1Down:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(879,99,2247)
+end)
+
+CellsTP.MouseButton1Down:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(910,99,2477)
+end)
+
+Lock.MouseButton1Down:connect(function()
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 24
+	game.Players.LocalPlayer.Character.ClientInputHandler.Disabled = true
+	game.Players.LocalPlayer.CharacterAdded:connect(function()
+	game.Workspace:WaitForChild(game.Players.LocalPlayer.Name)
+	game.Players.LocalPlayer.Character.ClientInputHandler.Disabled = true
+	end)
+end)
+
+NexusTP.MouseButton1Down:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(879,99,2377)
+end)
+
+ObGuns.MouseButton1Down:connect(function()	
+	if game.Players.LocalPlayer.Team.Name == "Criminals" then 
+		if game.Players.LocalPlayer.Character:FindFirstChildOfClass("ForceField") then return end
+	end
+	getGuns()
+end)
+
+Refresh.MouseButton1Down:connect(function()
+	if (game.Players.LocalPlayer.Team.Name ~= "Criminals") then
+		local lastPos = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").position
+		local plr = game.Players.LocalPlayer.Name
+		local gayevent = game:GetService("Workspace").Remote.loadchar
+		gayevent:InvokeServer(plr)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(lastPos)
+	else
+		local lastPos = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").position
+		Workspace.Remote.TeamEvent:FireServer("Bright orange")
+		wait()
+		local plr = game.Players.LocalPlayer.Name
+		local gayevent = game:GetService("Workspace").Remote.loadchar
+		gayevent:InvokeServer(plr)
+		LCS = game.Workspace["Criminals Spawn"].SpawnLocation
+		LCS.CanCollide = false
+		LCS.Size = Vector3.new(51.05, 24.12, 54.76)
+		LCS.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		LCS.Transparency = 1
+		wait(0.5)
+		LCS.CFrame = CFrame.new(-920.510803, 92.2271957, 2138.27002, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+		LCS.Size = Vector3.new(6, 0.2, 6)
+		LCS.Transparency = 0
+		wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(lastPos)
+	end
+end)
+
+Respawn.MouseButton1Down:connect(function()
+	local lastPos = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").position
+	local plr = game.Players.LocalPlayer.Name
+	local gayevent = game:GetService("Workspace").Remote.loadchar
+	gayevent:InvokeServer(plr)
+end)
+
+YardTP.MouseButton1Down:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(779,99,2477)
+end)
+
+game:GetService("UserInputService").InputBegan:connect(function(inputObject, gameProcessedEvent)
+	if gameProcessedEvent then return end
+	local children = Frame:GetChildren()
+    if inputObject.KeyCode == Enum.KeyCode.Q then
+    	if Frame.BackgroundTransparency == 0 then
+			Frame.BackgroundTransparency = 1
+			for i, child in ipairs(children) do
+				print(child.Name)
+				child.BackgroundTransparency = 1
+				child.TextTransparency = 1
+			end
+		else
+			Frame.BackgroundTransparency = 0
+			for i, child in ipairs(children) do
+				if child.Name ~= "Title" then
+					child.BackgroundTransparency = 0
+				end
+				child.TextTransparency = 0
+			end
+		end
+    end
+	if inputObject.KeyCode == Enum.KeyCode.Z then
+		if ChatEnabled then
+			ChatEnabled = false
+			game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
+			for i, player in pairs(game.Players:GetPlayers()) do
+				player:WaitForChild("PlayerScripts").BubbleChat.Disabled = true
+				player:WaitForChild("PlayerGui").BubbleChat:Destroy()
+			end
+		else
+			ChatEnabled = true
+			game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
+			for i, player in pairs(game.Players:GetPlayers()) do
+				player:WaitForChild("PlayerScripts").BubbleChat.Disabled = false
+			end
+		end
+	end
+	if inputObject.KeyCode == Enum.KeyCode.Slash then
+		ChatEnabled = true
+		game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
+	end
+	if inputObject.KeyCode == Enum.KeyCode.X then
+		if BubblesEnabled then
+			BubblesEnabled = false
+			for i, player in pairs(game.Players:GetPlayers()) do
+				player:WaitForChild("PlayerScripts").BubbleChat.Disabled = true
+				player:WaitForChild("PlayerGui").BubbleChat:Destroy()
+			end
+		else
+			BubblesEnabled = true
+			for i, player in pairs(game.Players:GetPlayers()) do
+				player:WaitForChild("PlayerScripts").BubbleChat.Disabled = false
+			end
+		end
+	end
+	if inputObject.KeyCode == Enum.KeyCode.E then
+		if game.Players.LocalPlayer.Team.Name == "Criminals" then 
+			if game.Players.LocalPlayer.Character:FindFirstChildOfClass("ForceField") then return end
+		end
+		if (game.Players.LocalPlayer.Backpack:FindFirstChild("M9")) then
+			game.Players.LocalPlayer.Backpack:FindFirstChild("M9").Parent = game.Players.LocalPlayer
+		end
+		if (game.Players.LocalPlayer.Backpack:FindFirstChild("Taser")) then
+			game.Players.LocalPlayer.Backpack.Taser:Destroy()
+		end
+		if (game.Players.LocalPlayer.Backpack:FindFirstChild("Handcuffs")) then
+			game.Players.LocalPlayer.Backpack.Handcuffs:Destroy()
+		end
+		getGuns()
+	end
+end)
+
+
+
+function dragify(Frame)
+dragToggle = nil
+dragSpeed = 100000 -- You can edit this.
+dragInput = nil
+dragStart = nil
+dragPos = nil
+
+function updateInput(input)
+Delta = input.Position - dragStart
+Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+game:GetService("TweenService"):Create(Frame, TweenInfo.new(0), {Position = Position}):Play()
+end
+
+Frame.InputBegan:Connect(function(input)
+if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+dragToggle = true
+dragStart = input.Position
+startPos = Frame.Position
+input.Changed:Connect(function()
+if (input.UserInputState == Enum.UserInputState.End) then
+dragToggle = false
+end
+end)
+end
+end)
+
+Frame.InputChanged:Connect(function(input)
+if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+dragInput = input
+end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+if (input == dragInput and dragToggle) then
+updateInput(input)
+end
+end)
+end
+
+dragify(Frame) 
+end)
+
+b:Button("RTX",function()
+    getgenv().mode = "Summer" -- Choose from Summer and Autumn
+
+
+
+
+local a = game.Lighting
+a.Ambient = Color3.fromRGB(33, 33, 33)
+a.Brightness = 6.67
+a.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
+a.ColorShift_Top = Color3.fromRGB(255, 247, 237)
+a.EnvironmentDiffuseScale = 0.105
+a.EnvironmentSpecularScale = 0.522
+a.GlobalShadows = true
+a.OutdoorAmbient = Color3.fromRGB(51, 54, 67)
+a.ShadowSoftness = 0.04
+a.GeographicLatitude = -15.525
+a.ExposureCompensation = 0.75
+local b = Instance.new("BloomEffect", a)
+b.Enabled = true
+b.Intensity = 0.04
+b.Size = 1900
+b.Threshold = 0.915
+local c = Instance.new("ColorCorrectionEffect", a)
+c.Brightness = 0.176
+c.Contrast = 0.39
+c.Enabled = true
+c.Saturation = 0.2
+c.TintColor = Color3.fromRGB(217, 145, 57)
+if getgenv().mode == "Summer" then
+   c.TintColor = Color3.fromRGB(255, 220, 148)
+elseif getgenv().mode == "Autumn" then
+   c.TintColor = Color3.fromRGB(217, 145, 57)
+else
+   warn("No mode selected!")
+   print("Please select a mode")
+   b:Destroy()
+   c:Destroy()
+end
+local d = Instance.new("DepthOfFieldEffect", a)
+d.Enabled = true
+d.FarIntensity = 0.077
+d.FocusDistance = 21.54
+d.InFocusRadius = 20.77
+d.NearIntensity = 0.277
+local e = Instance.new("ColorCorrectionEffect", a)
+e.Brightness = 0
+e.Contrast = -0.07
+e.Saturation = 0
+e.Enabled = true
+e.TintColor = Color3.fromRGB(255, 247, 239)
+local e2 = Instance.new("ColorCorrectionEffect", a)
+e2.Brightness = 0.2
+e2.Contrast = 0.45
+e2.Saturation = -0.1
+e2.Enabled = true
+e2.TintColor = Color3.fromRGB(255, 255, 255)
+local s = Instance.new("SunRaysEffect", a)
+s.Enabled = true
+s.Intensity = 0.01
+s.Spread = 0.146
+
+print("RTX Graphics loaded! Created by BrickoIcko")
+
+end) 
+
+b:DestroyGui()
+end
+}) 
+
+Tab:AddButton({
+	Name = "甩飞(好人翻译)",
+	Callback = function()
+local ultimateFling = Instance.new("ScreenGui")
+local drag = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local windowNameFrame = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local windowNameLabel = Instance.new("TextLabel")
+local closeButton = Instance.new("TextButton")
+local mainFrame = Instance.new("Frame")
+local UICorner_3 = Instance.new("UICorner")
+local buttonsFrame = Instance.new("Frame")
+local toggleButton = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local rotSpeedLabel = Instance.new("TextLabel")
+local UICorner_5 = Instance.new("UICorner")
+local rotSpeedTextbox = Instance.new("TextBox")
+local flySpeedLabel = Instance.new("TextLabel")
+local UICorner_6 = Instance.new("UICorner")
+local flySpeedTextbox = Instance.new("TextBox")
+local UICorner_7 = Instance.new("UICorner")
+local notificationsFrame = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+local notificationTemplate = Instance.new("TextLabel")
+local teleportersFrame = Instance.new("Frame")
+local teleportingLabel = Instance.new("TextLabel")
+local UICorner_8 = Instance.new("UICorner")
+local tpingTextbox = Instance.new("TextBox")
+
+ultimateFling.Name = "ultimateFling"
+ultimateFling.Parent = game:GetService("CoreGui")
+ultimateFling.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ultimateFling.ResetOnSpawn = false
+
+drag.Name = "drag"
+drag.Parent = ultimateFling
+drag.Active = true
+drag.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+drag.BackgroundTransparency = 1.000
+drag.Draggable = true
+drag.Position = UDim2.new(0.5, -150, 0.5, -67)
+drag.Selectable = true
+drag.Size = UDim2.new(0, 300, 0, 135)
+
+UICorner.Parent = drag
+
+windowNameFrame.Name = "windowNameFrame"
+windowNameFrame.Parent = drag
+windowNameFrame.BackgroundColor3 = Color3.fromRGB(64, 64, 64)
+windowNameFrame.Size = UDim2.new(1, 0, 0, 30)
+
+UICorner_2.Parent = windowNameFrame
+
+windowNameLabel.Name = "windowNameLabel"
+windowNameLabel.Parent = windowNameFrame
+windowNameLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+windowNameLabel.BackgroundTransparency = 1.000
+windowNameLabel.BorderSizePixel = 0
+windowNameLabel.Size = UDim2.new(1, 0, 0, 20)
+windowNameLabel.Font = Enum.Font.SourceSans
+windowNameLabel.Text = "甩飞脚本"
+windowNameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+windowNameLabel.TextSize = 20.000
+
+closeButton.Name = "closeButton"
+closeButton.Parent = windowNameLabel
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.BackgroundTransparency = 1.000
+closeButton.BorderSizePixel = 0
+closeButton.Position = UDim2.new(1, -20, 0, 0)
+closeButton.Size = UDim2.new(0, 20, 0, 20)
+closeButton.Font = Enum.Font.SourceSans
+closeButton.Text = "X"
+closeButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+closeButton.TextSize = 20.000
+
+mainFrame.Name = "mainFrame"
+mainFrame.Parent = drag
+mainFrame.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+mainFrame.Position = UDim2.new(0, 0, 0, 20)
+mainFrame.Size = UDim2.new(1, 0, 1, -20)
+
+UICorner_3.Parent = mainFrame
+
+buttonsFrame.Name = "buttonsFrame"
+buttonsFrame.Parent = mainFrame
+buttonsFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+buttonsFrame.BackgroundTransparency = 0.500
+buttonsFrame.Size = UDim2.new(0, 110, 1, 0)
+
+toggleButton.Name = "toggleButton"
+toggleButton.Parent = buttonsFrame
+toggleButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+toggleButton.BackgroundTransparency = 0.800
+toggleButton.BorderSizePixel = 0
+toggleButton.Position = UDim2.new(0, 5, 0, 5)
+toggleButton.Size = UDim2.new(0, 100, 0, 25)
+toggleButton.Font = Enum.Font.SourceSans
+toggleButton.Text = "开始甩飞"
+toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleButton.TextSize = 20.000
+
+UICorner_4.Parent = toggleButton
+
+rotSpeedLabel.Name = "rotSpeedLabel"
+rotSpeedLabel.Parent = buttonsFrame
+rotSpeedLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+rotSpeedLabel.BackgroundTransparency = 0.800
+rotSpeedLabel.Position = UDim2.new(0, 5, 0, 35)
+rotSpeedLabel.Size = UDim2.new(0, 100, 0, 35)
+rotSpeedLabel.Font = Enum.Font.SourceSans
+rotSpeedLabel.Text = "旋转速度"
+rotSpeedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+rotSpeedLabel.TextSize = 14.000
+rotSpeedLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+UICorner_5.Parent = rotSpeedLabel
+
+rotSpeedTextbox.Name = "rotSpeedTextbox"
+rotSpeedTextbox.Parent = rotSpeedLabel
+rotSpeedTextbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+rotSpeedTextbox.BackgroundTransparency = 1.000
+rotSpeedTextbox.Position = UDim2.new(0, 0, 0, 13)
+rotSpeedTextbox.Size = UDim2.new(1, 0, 1, -13)
+rotSpeedTextbox.ClearTextOnFocus = false
+rotSpeedTextbox.Font = Enum.Font.SourceSans
+rotSpeedTextbox.Text = "10000"
+rotSpeedTextbox.TextColor3 = Color3.fromRGB(0, 255, 0)
+rotSpeedTextbox.TextSize = 16.000
+
+flySpeedLabel.Name = "flySpeedLabel"
+flySpeedLabel.Parent = buttonsFrame
+flySpeedLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+flySpeedLabel.BackgroundTransparency = 0.800
+flySpeedLabel.Position = UDim2.new(0, 5, 0, 75)
+flySpeedLabel.Size = UDim2.new(0, 100, 0, 35)
+flySpeedLabel.Font = Enum.Font.SourceSans
+flySpeedLabel.Text = "飞行速度"
+flySpeedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+flySpeedLabel.TextSize = 14.000
+flySpeedLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+UICorner_6.Parent = flySpeedLabel
+
+flySpeedTextbox.Name = "flySpeedTextbox"
+flySpeedTextbox.Parent = flySpeedLabel
+flySpeedTextbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+flySpeedTextbox.BackgroundTransparency = 1.000
+flySpeedTextbox.Position = UDim2.new(0, 0, 0, 13)
+flySpeedTextbox.Size = UDim2.new(1, 0, 1, -13)
+flySpeedTextbox.ClearTextOnFocus = false
+flySpeedTextbox.Font = Enum.Font.SourceSans
+flySpeedTextbox.Text = "1"
+flySpeedTextbox.TextColor3 = Color3.fromRGB(0, 255, 0)
+flySpeedTextbox.TextSize = 16.000
+
+UICorner_7.Parent = buttonsFrame
+
+notificationsFrame.Name = "notificationsFrame"
+notificationsFrame.Parent = mainFrame
+notificationsFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+notificationsFrame.BackgroundTransparency = 1.000
+notificationsFrame.ClipsDescendants = true
+notificationsFrame.Position = UDim2.new(0, 110, 0, 45)
+notificationsFrame.Size = UDim2.new(1, -110, 1, -45)
+
+UIListLayout.Parent = notificationsFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+
+notificationTemplate.Name = "notificationTemplate"
+notificationTemplate.Parent = notificationsFrame
+notificationTemplate.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+notificationTemplate.BackgroundTransparency = 1.000
+notificationTemplate.ClipsDescendants = true
+notificationTemplate.Size = UDim2.new(1, 0, 0, 20)
+notificationTemplate.Visible = false
+notificationTemplate.Font = Enum.Font.SourceSans
+notificationTemplate.Text = ""
+notificationTemplate.TextColor3 = Color3.fromRGB(255, 255, 255)
+notificationTemplate.TextSize = 19.000
+notificationTemplate.TextWrapped = true
+
+teleportersFrame.Name = "teleportersFrame"
+teleportersFrame.Parent = mainFrame
+teleportersFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+teleportersFrame.BackgroundTransparency = 1.000
+teleportersFrame.ClipsDescendants = true
+teleportersFrame.Position = UDim2.new(0, 110, 0, 0)
+teleportersFrame.Size = UDim2.new(1, -110, 0, 45)
+
+teleportingLabel.Name = "teleportingLabel"
+teleportingLabel.Parent = teleportersFrame
+teleportingLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+teleportingLabel.BackgroundTransparency = 0.800
+teleportingLabel.Position = UDim2.new(0, 5, 0, 5)
+teleportingLabel.Size = UDim2.new(1, -10, 1, -10)
+teleportingLabel.Font = Enum.Font.SourceSans
+teleportingLabel.Text = "传送踢飞(0禁用)"
+teleportingLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+teleportingLabel.TextSize = 14.000
+teleportingLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+UICorner_8.Parent = teleportingLabel
+
+tpingTextbox.Name = "tpingTextbox"
+tpingTextbox.Parent = teleportingLabel
+tpingTextbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+tpingTextbox.BackgroundTransparency = 1.000
+tpingTextbox.Position = UDim2.new(0, 0, 0, 13)
+tpingTextbox.Size = UDim2.new(1, 0, 1, -13)
+tpingTextbox.ClearTextOnFocus = false
+tpingTextbox.Font = Enum.Font.SourceSans
+tpingTextbox.Text = "0"
+tpingTextbox.TextColor3 = Color3.fromRGB(0, 255, 0)
+tpingTextbox.TextSize = 16.000
+
+local function align(Part0, Part1)
+	Part0.CustomPhysicalProperties = PhysicalProperties.new(0.001, 0.001, 0.001, 0.001, 0.001)
+	local att1 = Instance.new("Attachment")
+	att1.Orientation = Vector3.new(0, 0, 0)
+	att1.Position = Vector3.new(0, 0, 0)
+	att1.Archivable = true
+	local att0 = att1:Clone()
+
+	local ap = Instance.new("AlignPosition", att0)
+	ap.ApplyAtCenterOfMass = true
+	ap.MaxForce = 9e9
+	ap.MaxVelocity = 9e9
+	ap.ReactionForceEnabled = false
+	ap.Responsiveness = 200
+	ap.RigidityEnabled = false
+
+	ap.Attachment1 = att1
+	ap.Attachment0 = att0
+
+	att1.Parent = Part1
+	att0.Parent = Part0
+end
+
+local rs = game:GetService("RunService")
+
+local function notify(msg)
+	spawn(function()
+		local label = notificationTemplate:Clone()
+		label.Text = msg
+		label.Parent = notificationsFrame
+		label.Size = UDim2.new(1, 0, 0, 0)
+		label.Visible = true
+		local siz = 0
+		while rs.Stepped:Wait() and label and label.Parent and (siz < 20) do
+			siz += 1
+			label.Size = UDim2.new(1, 0, 0, siz)
+		end
+		if label and label.Parent then
+			wait(15)
+			while rs.Stepped:Wait() and label and label.Parent and (label.TextTransparency < 1) do
+				label.TextTransparency += 0.1
+			end
+			if label and label.Parent then
+				label:Destroy()
+			end
+		end
+	end)
+end
+
+local plrs = game:GetService("Players")
+local lp = plrs.LocalPlayer
+local mouse = lp:GetMouse()
+local ws = game:GetService("Workspace")
+local c = nil
+
+local function resReq()
+	local nm = Instance.new("Model")
+	local nh = Instance.new("Humanoid", nm)
+	nh.Health = 100
+	lp.Character = nm
+	nh.Health = 0
+	nh:Destroy()
+	nm:Destroy()
+end
+
+local parts = {}
+
+ws.DescendantRemoving:Connect(function(des)
+	if table.find(parts, des) then
+		local desn = des.Name
+		wait()
+		if c and c.Parent then
+			notify("lost part: " .. desn)
+		end
+	end
+end)
+
+toggleButton.MouseButton1Click:Connect(function()
+	if c and c.Parent then
+		resReq()
+		lp.Character = c
+		notify("正在重生...")
+	else
+		notify("等待...")
+		c = lp.Character
+		if not (c and c.Parent) then
+			notify("错误:找不到人物")
+			return nil
+		end
+		local hum = c:FindFirstChildOfClass("Humanoid")
+		if not (hum and hum.Parent) then
+			notify("错误:Humanoid没有找到")
+			return nil
+		end
+		if hum.Health == 0 then
+			notify("错误:人物基址血量=0")
+			return nil
+		end
+		resReq()
+		lp.Character = c
+		wait(5.1)
+		if not (c and c.Parent) then
+			notify("错误:人物被重置了")
+			return nil
+		end
+		if not (hum and hum.Parent) then
+			notify("错误:人物被重置了")
+			return nil
+		end
+		if hum.Health == 0 then
+			notify("错误:人物死亡")
+			return nil
+		end
+		c:BreakJoints()
+		hum.Health = 0
+		wait()
+		if not (c and c.Parent) then
+			notify("错误:人物死亡")
+			return nil
+		end
+		parts = {}
+		for i, v in pairs(c:GetDescendants()) do
+			if v and v.Parent and v:IsA("BasePart") then
+				if v.CanCollide then
+					table.insert(parts, v)
+				else
+					v.Velocity = Vector3.new(0, -1000, 0)
+				end
+			end
+		end
+		local hrp = Instance.new("Part", c)
+		hrp.Name = "hrp"
+		hrp.Anchored = true
+		hrp.Transparency = 1
+		pcall(function()
+			hrp.CFrame = parts[1].CFrame
+		end)
+		ws.CurrentCamera.CameraSubject = hrp
+		for i, v in pairs(parts) do
+			if v and v.Parent then
+				align(v, hrp)
+			end
+		end
+		spawn(function()
+			local currentp = nil
+			spawn(function()
+				while rs.Stepped:Wait() and c and c.Parent and hrp and hrp.Parent do
+					if currentp and currentp.Parent then
+						local c1 = currentp.Character
+						if c1 and c1.Parent then
+							local hed1 = c1:FindFirstChild("Head") or c1:FindFirstChild("Torso") or c1:FindFirstChild("HumanoidRootPart") or c1:FindFirstChildWhichIsA("BasePart")
+							if hed1 then
+								hrp.CFrame = hed1.CFrame
+							end
+						end
+					end
+				end
+			end)
+			while rs.Heartbeat:Wait() and c and c.Parent and hrp and hrp.Parent do
+				local delay = tonumber(tpingTextbox.Text)
+				if (not delay) or (delay < 0) then
+					delay = 0
+				end
+				if delay == 0 then
+					currentp = false
+				else
+					wait(delay)
+					delay = tonumber(tpingTextbox.Text)
+					if (not delay) or (delay < 0) then
+						delay = 0
+					end
+					if c and c.Parent and hrp and hrp.Parent and (delay ~= 0) then
+						local getp = plrs:GetPlayers()
+						local i1 = false
+						for i, v in pairs(getp) do
+							if (v == currentp) and (v ~= lp) then
+								i1 = i
+							end
+						end
+						if (not i1) then
+							i1 = 1
+						end
+						local function nextp()
+							if i1 == #getp then
+								i1 = 1
+							else
+								i1 += 1
+							end
+							currentp = getp[i1]
+						end
+						local c1 = nil
+						while wait() and not (c1 and c1.Parent) do
+							nextp()
+							if currentp == lp then
+								nextp()
+							end
+							c1 = currentp.Character
+						end
+					end
+				end
+			end
+		end)
+
+		spawn(function()
+			while c and c.Parent and rs.Heartbeat:Wait() do
+				for i, v in pairs(parts) do
+					if v and v.Parent then
+						v.Velocity = Vector3.new(0, -25.05, 0)
+						local s = tonumber(rotSpeedTextbox.Text)
+						v.RotVelocity = Vector3.new(s, s, s)
+					end
+				end
+			end
+		end)
+
+		spawn(function()
+			while rs.Stepped:Wait() and c and c.Parent do
+				for i, v in pairs(parts) do
+					if v and v.Parent then
+						v.CanCollide = false
+					end
+				end
+			end
+		end)
+
+		spawn(function()
+			local ctrlf = {
+				["w"] = false,
+				["a"] = false,
+				["s"] = false,
+				["d"] = false
+			}
+			mouse.KeyDown:Connect(function(key)
+				key = key:lower()
+				if ctrlf[key] ~= nil then
+					ctrlf[key] = true
+				end
+			end)
+			mouse.KeyUp:Connect(function(key)
+				key = key:lower()
+				if ctrlf[key] ~= nil then
+					ctrlf[key] = false
+				end
+			end)
+			while rs.RenderStepped:Wait() and c and c.Parent do
+				if hrp and hrp.Parent then
+					local flyspeed = tonumber(flySpeedTextbox.Text)
+					local fb = ((ctrlf["w"] and flyspeed) or 0) + ((ctrlf["s"] and -flyspeed) or 0)
+					local lr = ((ctrlf["a"] and -flyspeed) or 0) + ((ctrlf["d"] and flyspeed) or 0)
+					local camcf = ws.CurrentCamera.CFrame
+					local caX, caY, caZ, ca1, ca2, ca3, ca4, ca5, ca6, ca7, ca8, ca9 = camcf:GetComponents()
+					local flycf = hrp.CFrame
+					flycf = CFrame.new(flycf.X, flycf.Y, flycf.Z, ca1, ca2, ca3, ca4, ca5, ca6, ca7, ca8, ca9)
+					flycf += camcf.lookVector * fb
+					flycf += camcf.rightVector * lr
+					hrp.CFrame = flycf
+				end
+			end
+			
+			local c1 = lp.Character
+			if c1 and c1.Parent then
+				notify("已重生")
+			end
+			
+			if toggleButton and toggleButton.Parent then
+				toggleButton.Text = "开始弹飞"
+			end
+		end)
+		
+		if toggleButton and toggleButton.Parent then
+			toggleButton.Text = "重生"
+		end
+		
+		notify("完成")
+	end
+end)
+
+closeButton.MouseButton1Click:Connect(function()
+	if c and c.Parent then
+		resReq()
+	end
+	ultimateFling:Destroy()
+end)
+end
+})
+
+Tab:AddButton({
+	Name = "强行封号(娱乐效果)",
+	Callback = function()
+for _,v in pairs(game:GetDescendants()) do
+if v.ClassName == "RemoteEvent" then
+if v.Parent.Name == "WeaponsRemotes" or v.Parent.Name == "VipRemotes" or v.Parent.Name == "Remotes" then
+v:FireServer()
+end
+end
+end
+end
+})    
+
+Tab:AddButton({
+	Name = "好玩的脚本(恶搞必备)",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
+end
+})    
+
+local Tab = Window:MakeTab({
+    Name = "doors",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "mshub(未汉化)",
+	Callback = function()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/mstudio45/MSDOORS/main/MSHUB_Loader.lua"),true))()
+end
+})    
+
+Tab:AddButton({
+	Name = "圣光手雷(可以炸图)",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/u5B1UjGv"))()
+end
+})
+
+Tab:AddButton({
+	Name = "DXuwu(里面有模式道具,国人制作)",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DXuwu/test-lol/main/YO.lua"))()
+end
+})
+
+Tab:AddButton({
+	Name = "blackking And BobHub汉化",
+	Callback = function()
+--[[Doors Blackking And BobHub脚本汉化]]loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\54\53\84\119\84\56\106\97"))()
+end
+})
+Tab:AddButton({
+	Name = "最强(未汉化)",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Doors"))()
+end
+})
+
+Tab:AddButton({
+	Name = "地板二(改地图)",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/iCherryKardes/Doors/main/Floor%202%20Mod"))()
+end
+})
+
+Tab:AddButton({
+	Name = "变身怪物(对手机可能有点不友好)",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ChronoAccelerator/Public-Scripts/main/Morphing/MorphScript.lua"))();
+end
+})
+
+Tab:AddButton({
+	Name = "紫色手电筒(请在开局的时候购买)",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/K0t1n/Public/main/Purple%20Flashlight%20Script.lua"))()
+end
+})
+
+Tab:AddButton({
+	Name = "诅咒模式",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/script/doors/mode')()
+end
+})    
+
+Tab:AddButton({
+	Name = "生日模式",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/plamen6789/BirthdayModeDOORS/main/BirthdayModeScript'))()
+end
+})    
+
+Tab:AddButton({
+	Name = "脚本中转站",
+	Callback = function()
+loadstring(game:HttpGet("https://shz.al/TdnyGe7c7sC76zzWNXSsZQFG"))()
+end
+})    
+
+Tab:AddButton({
+	Name = "硬核V6",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.Motherfucker.com/Idiot114514/false/main/Bad-Hardcore_Mode.lua"))()
+end
+})    
+
+Tab:AddButton({
+	Name = "不可能模式",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Ukazix/impossible-mode/main/Protected_79.lua.txt'))()
+end
+})    
+
+Tab:AddButton({
+	Name = "硬核重置",
+	Callback = function()
+loadstring(game:HttpGet("https://glot.io/snippets/gp5pu59o7f/raw"))()
+end
+})    
+
+Tab:AddButton({
+	Name = "未知脚本",
+	Callback = function()
+loadstring(game:HttpGet(('https://pastebin.com/raw/9QPGnLx6'),true))()
+end
+})    
+
+Tab:AddButton({
+	Name = "未知脚本模式",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/munciseek/DOORS-mode/main/ScripV2"))()
+end
+})    
+
+Tab:AddButton({
+	Name = "生成Rebound(硬核)",
+	Callback = function()
+--该脚本生成的Rebound仅为硬核模式对于此实体的第1次模型整改（Rebound的第2个模型）所遗留的产物
+
+local Reboundcolor = Instance.new("ColorCorrectionEffect",game.Lighting) game.Debris:AddItem(Reboundcolor,24)
+                Reboundcolor.Name = "Warn"
+                Reboundcolor.TintColor = Color3.fromRGB(65, 138, 255) Reboundcolor.Saturation = -0.7 Reboundcolor.Contrast = 0.2
+                game.TweenService:Create(Reboundcolor,TweenInfo.new(15),{TintColor = Color3.fromRGB(255, 255, 255),Saturation = 0, Contrast = 0}):Play()
+local TweenService = game:GetService("TweenService")
+local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(5),{TintColor = Color3.fromRGB(255, 255, 255)})
+TW:Play()
+local cue1 = Instance.new("Sound")
+cue1.Parent = game.Workspace
+cue1.Name = "Scream"
+cue1.SoundId = "rbxassetid://9114397505"
+local distort = Instance.new("DistortionSoundEffect")
+distort.Parent = cue1
+distort.Level = 1
+local distort2 = Instance.new("DistortionSoundEffect")
+distort2.Parent = cue1
+distort2.Level = 1
+local pitch = Instance.new("PitchShiftSoundEffect")
+pitch.Parent = cue1
+pitch.Octave = 0.5
+local pitch2 = Instance.new("PitchShiftSoundEffect")
+pitch2.Parent = cue1
+pitch2.Octave = 0.5
+local pitch3 = Instance.new("PitchShiftSoundEffect")
+pitch3.Parent = cue1
+pitch3.Octave = 0.5
+cue1.Volume = 0.1
+cue1:Play()
+local cue2 = Instance.new("Sound")
+cue2.Parent = game.Workspace
+cue2.Name = "Spawn"
+cue2.SoundId = "rbxassetid://9114221327"
+cue2.Volume = 3
+cue2:Play()
+local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camara = game.Workspace.CurrentCamera
+local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(shakeCf)
+    camara.CFrame = camara.CFrame * shakeCf
+end)
+end
+})
+
+Tab:AddButton({
+	Name = "rooms自动过关两倍速",
+	Callback = function()
+-- 夜，我帮你翻译的
+-- 谢谢我
+
+if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Rooms" then
+	game.StarterGui:SetCore("SendNotification", { Title = "无效位置"; Text = "检测到的游戏似乎不是房间" })
+	
+	local Sound = Instance.new("Sound")
+	Sound.Parent = game.SoundService
+	Sound.SoundId = "rbxassetid://550209561"
+	Sound.Volume = 5
+	Sound.PlayOnRemove = true
+	Sound:Destroy()
+	
+	return
+elseif workspace:FindFirstChild("PathFindPartsFolder") then
+	game.StarterGui:SetCore("SendNotification", { Title = "Warning"; Text = "检查是QQ用户1289603470（凉）" })
+	
+	local Sound = Instance.new("Sound")
+	Sound.Parent = game.SoundService
+	Sound.SoundId = "rbxassetid://550209561"
+	Sound.Volume = 5
+	Sound.PlayOnRemove = true
+	Sound:Destroy()
+
+	return
+end
+
+local PathfindingService = game:GetService("PathfindingService")
+local VirtualInputManager = game:GetService('VirtualInputManager')
+local LocalPlayer = game.Players.LocalPlayer
+local LatestRoom = game.ReplicatedStorage.GameData.LatestRoom
+
+local Cooldown = false
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.CoreGui
+
+local TextLabel = Instance.new("TextLabel")
+TextLabel.Parent = ScreenGui
+
+TextLabel.Size = UDim2.new(0,350,0,100)
+TextLabel.TextSize = 48
+TextLabel.TextStrokeColor3 = Color3.new(1,1,1)
+TextLabel.TextStrokeTransparency = 0
+TextLabel.BackgroundTransparency = 1
+
+local GC = getconnections or get_signal_cons
+if GC then
+    for i,v in pairs(GC(LocalPlayer.Idled)) do
+        if v["Disable"] then
+            v["Disable"](v)
+        elseif v["Disconnect"] then
+            v["Disconnect"](v)
+        end
+    end
+end
+
+local Folder = Instance.new("Folder")
+Folder.Parent = workspace
+Folder.Name = "PathFindPartsFolder"
+
+if LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("A90") then
+    LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.A90.Name = "lol" -- Fuck you A90
+end
+
+function getLocker()
+    local Closest
+
+    for i,v in pairs(workspace.CurrentRooms:GetDescendants()) do
+        if v.Name == "Rooms_Locker" then
+            if v:FindFirstChild("Door") and v:FindFirstChild("HiddenPlayer") then
+                if v.HiddenPlayer.Value == nil then
+                    if v.Door.Position.Y > -3 then -- Prevents going to the lower lockers in the room with the bridge 
+                        if Closest == nil then
+                            Closest = v.Door
+                        else
+                            if (LocalPlayer.Character.HumanoidRootPart.Position - v.Door.Position).Magnitude < (Closest.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude then
+                                Closest = v.Door
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return Closest
+end
+
+function getPath()
+    local Part
+	
+    local Entity = workspace:FindFirstChild("A60") or workspace:FindFirstChild("A120")
+    if Entity and Entity.Main.Position.Y > -4 then
+        Part = getLocker()
+    else
+        Part = workspace.CurrentRooms[LatestRoom.Value].Door.Door
+    end
+    return Part
+end
+
+LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()
+    TextLabel.Text = "你的房间号为: A-00 "..math.clamp(LatestRoom.Value, 1,1000)
+
+    if LatestRoom.Value ~= 210 then
+        LocalPlayer.DevComputerMovementMode = Enum.DevComputerMovementMode.Scriptable
+    else
+        LocalPlayer.DevComputerMovementMode = Enum.DevComputerMovementMode.KeyboardMouse
+	
+        Folder:ClearAllChildren()
+    
+        local Sound = Instance.new("Sound")
+        Sound.Parent = game.SoundService
+        Sound.SoundId = "rbxassetid://4590662766"
+        Sound.Volume = 3
+        Sound.PlayOnRemove = true
+        Sound:Destroy()
+        
+        game.StarterGui:SetCore("SendNotification", { Title = "youtube.com/geoduude"; Text = "老子（114514xhxh)帮你翻译的" })
+        return
+    end
+end)
+
+game:GetService("RunService").RenderStepped:connect(function()
+    LocalPlayer.Character.HumanoidRootPart.CanCollide = false
+    LocalPlayer.Character.Collision.CanCollide = false
+    LocalPlayer.Character.Collision.Size = Vector3.new(8,LocalPlayer.Character.Collision.Size.Y,8)
+
+    LocalPlayer.Character.Humanoid.WalkSpeed = 21
+
+    local Path = getPath()
+    
+    local Entity = workspace:FindFirstChild("A60") or workspace:FindFirstChild("A120")
+    if Entity then
+        if Path then
+            if Path.Parent.Name == "Rooms_Locker" then
+                if Entity.Main.Position.Y > -4 then
+                    if (LocalPlayer.Character.HumanoidRootPart.Position - Path.Position).Magnitude < 2 then
+                        if LocalPlayer.Character.HumanoidRootPart.Anchored == false then
+                            fireproximityprompt(Path.Parent.HidePrompt)
+                        end
+                    end
+                end
+            end
+        end
+        if Entity.Main.Position.Y < -4 then
+            if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
+                LocalPlayer.Character:SetAttribute("Hiding", false)
+            end
+        end
+    else
+        if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
+            LocalPlayer.Character:SetAttribute("Hiding", false)
+        end
+    end
+end)
+
+while true do
+
+    local Destination = getPath()
+
+    local path = PathfindingService:CreatePath({ WaypointSpacing = 1, AgentRadius = 0.1, AgentCanJump = false })
+    path:ComputeAsync(LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(0,3,0), Destination.Position)
+    local Waypoints = path:GetWaypoints()
+
+    if path.Status ~= Enum.PathStatus.NoPath then
+
+        Folder:ClearAllChildren()
+
+        for _, Waypoint in pairs(Waypoints) do
+            local part = Instance.new("Part")
+            part.Size = Vector3.new(1,1,1)
+            part.Position = Waypoint.Position
+            part.Shape = "Cylinder"
+            part.Rotation = Vector3.new(0,0,90)
+            part.Material = "SmoothPlastic"
+            part.Anchored = true
+            part.CanCollide = false
+            part.Parent = Folder
+        end
+
+        for _, Waypoint in pairs(Waypoints) do
+            if LocalPlayer.Character.HumanoidRootPart.Anchored == false then
+                LocalPlayer.Character.Humanoid:MoveTo(Waypoint.Position)
+                LocalPlayer.Character.Humanoid.MoveToFinished:Wait()
+            end
+        end
+    end
+end
+end
+})
+
+Tab:AddButton({
+	Name = "极端",
+	Callback = function()
+loadstring(game:HttpGet('https://github.com/HollowedOutMods/MayhemMode/blob/main/loader.lua?raw=true'))()
+end
+})
+
+local Tab = Window:MakeTab({
+    Name = "彩虹朋友",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+}) 
+
+Tab:AddButton({
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/JNHHGaming/Rainbow-Friends/main/Rainbow%20Friends"))()
+  end
+})
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Ihaveash0rtnamefordiscord/BorkWare/main/Scripts/' .. game.GameId .. ".lua"))(' Watermelon ? ')
+end
+})    
+
+local Tab = Window:MakeTab({
+    Name = "手臂摔跤模拟器",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KrzysztofHub/script/main/loader.lua"))()
+  end
+})
+
+local Tab = Window:MakeTab({
+    Name = "一路向西",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "快速抢劫",
+	Callback = function()
+loadstring(game:GetObjects("rbxassetid://10041726588")[1].Source)()
+end
+})    
+
+Tab:AddButton({
+	Name = "刷钱",
+	Callback = function()
+local Player = game:GetService("Players").LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:wait()
+local MaxLimit = game.Players.LocalPlayer.Stats.BagSizeLevel.CurrentAmount.Value
+
+while wait() do
+for i,v in pairs(game.Players.LocalPlayer.PlayerGui.InfoGui:GetDescendants()) do
+if v.Name == "Bag" and v.Visible == false then
+    Character.HumanoidRootPart.CFrame = game.Workspace.CashRegister.Open.CFrame
+    wait(1)
+repeat wait()
+game.Workspace.CashRegister.Active.Value = true
+game:GetService("ReplicatedStorage").GeneralEvents.Rob:FireServer("Register", { ["Part"]= workspace.CashRegister.Union, ["OpenPart"]= workspace.CashRegister.Open, ["ActiveValue"]= workspace.CashRegister.Active, ["Active"]= true })
+until game.Players.LocalPlayer.States.Bag.Value == MaxLimit
+    Character.HumanoidRootPart.CFrame = game.Workspace.Shops["OutlawGeneralStore1"].Head.ShopPart.CFrame
+end
+end
+end
+end
+}) 
+
+local Tab = Window:MakeTab({
+    Name = "河北唐县",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sw1ndlerScripts/RobloxScripts/main/Tang%20Country.lua"))()
+end
+})
+
+Tab:AddButton({
+	Name = "林(可刷钱)",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/linnblin/lin/main/lin"))()
+end
+}) 
+
+local Tab = Window:MakeTab({
+    Name = "鲨口求生",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+}) 
+
+Tab:AddButton({
+	Name = "杀鲨鱼",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sw1ndlerScripts/RobloxScripts/main/Misc%20Scripts/sharkbite2.lua",true))()
+  	end
+})
+
+local Tab = Window:MakeTab({
+	Name = "索尔的RNG",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Looser3itx/Hmmmmmmmmmmmmmmmmmmmmmmmmmmmm/main/loader.lua"))()
+  	end
+})
+
+local Tab = Window:MakeTab({
+	Name = "兵工厂",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+    Name = "1",
+    Callback = function()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
+    end
+})
+
+Tab:AddButton({
+    Name = "2",
+    Callback = function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/RandomAdamYT/DarkHub/master/Init'), true))()
+    end
+})
+
+local Tab = Window:MakeTab({
+    Name = "造船寻宝",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/urmomjklol69/GoldFarmBabft/main/GoldFarm.lua'),true))()
+end
+})    
+
+local Tab = Window:MakeTab({
+    Name = "感动星期五",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ShowerHead-FluxTeam/scripts/main/funky-friday-autoplay'))()
+  end
+})
+
+local Tab = Window:MakeTab({
+    Name = "背上只因剑",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "巨型战士",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0SwordWarriors"))()
+end
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet(('https://gist.githubusercontent.com/blox-hub-roblox/021bad62bbc6a0adc4ba4e625f9ad7df/raw/c89af6e1acf587d09e4ce4bc7510e7100e0c0065/swordWarrior.lua'),true))()
+end
+})
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0SwordWarriors"))()
+end
+})   
+
+local Tab = Window:MakeTab({
+    Name = "法宝模拟器",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/Bd6R0GaC"))()
+end
+})         
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FreeRobloxScripts/anime-fighting/main/simulator"))()
+end
+})
+
+Tab:AddButton({  
+    Name = "3",
+	Callback = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/ohio/main/Roblox232"))()
+	end
+})
+
+local Tab = Window:MakeTab({
+    Name = "彩虹朋友",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+}) 
+
+Tab:AddButton({
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/JNHHGaming/Rainbow-Friends/main/Rainbow%20Friends"))()
+  end
+})
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Ihaveash0rtnamefordiscord/BorkWare/main/Scripts/' .. game.GameId .. ".lua"))(' Watermelon ? ')
+end
+})    
+
+local Tab = Window:MakeTab({
+    Name = "手臂摔跤模拟器",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KrzysztofHub/script/main/loader.lua"))()
+  end
+})
+
+local Tab = Window:MakeTab({
+    Name = "一路向西",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "快速抢劫",
+	Callback = function()
+loadstring(game:GetObjects("rbxassetid://10041726588")[1].Source)()
+end
+})    
+
+Tab:AddButton({
+	Name = "刷钱",
+	Callback = function()
+local Player = game:GetService("Players").LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:wait()
+local MaxLimit = game.Players.LocalPlayer.Stats.BagSizeLevel.CurrentAmount.Value
+
+while wait() do
+for i,v in pairs(game.Players.LocalPlayer.PlayerGui.InfoGui:GetDescendants()) do
+if v.Name == "Bag" and v.Visible == false then
+    Character.HumanoidRootPart.CFrame = game.Workspace.CashRegister.Open.CFrame
+    wait(1)
+repeat wait()
+game.Workspace.CashRegister.Active.Value = true
+game:GetService("ReplicatedStorage").GeneralEvents.Rob:FireServer("Register", { ["Part"]= workspace.CashRegister.Union, ["OpenPart"]= workspace.CashRegister.Open, ["ActiveValue"]= workspace.CashRegister.Active, ["Active"]= true })
+until game.Players.LocalPlayer.States.Bag.Value == MaxLimit
+    Character.HumanoidRootPart.CFrame = game.Workspace.Shops["OutlawGeneralStore1"].Head.ShopPart.CFrame
+end
+end
+end
+end
+}) 
+
+local Tab = Window:MakeTab({
+    Name = "河北唐县",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sw1ndlerScripts/RobloxScripts/main/Tang%20Country.lua"))()
+end
+})
+
+Tab:AddButton({
+	Name = "林(可刷钱)",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/linnblin/lin/main/lin"))()
+end
+}) 
+
+local Tab = Window:MakeTab({
+    Name = "鲨口求生",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+}) 
+
+Tab:AddButton({
+	Name = "杀鲨鱼",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sw1ndlerScripts/RobloxScripts/main/Misc%20Scripts/sharkbite2.lua",true))()
+  	end
+})
+
+local Tab = Window:MakeTab({
+	Name = "索尔的RNG",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Looser3itx/Hmmmmmmmmmmmmmmmmmmmmmmmmmmmm/main/loader.lua"))()
+  	end
+})
+
+local Tab = Window:MakeTab({
+	Name = "兵工厂",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+    Name = "1",
+    Callback = function()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
+    end
+})
+
+Tab:AddButton({
+    Name = "2",
+    Callback = function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/RandomAdamYT/DarkHub/master/Init'), true))()
+    end
+})
+
+local Tab = Window:MakeTab({
+    Name = "造船寻宝",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/urmomjklol69/GoldFarmBabft/main/GoldFarm.lua'),true))()
+end
+})    
+
+local Tab = Window:MakeTab({
+    Name = "感动星期五",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ShowerHead-FluxTeam/scripts/main/funky-friday-autoplay'))()
+  end
+})
+
+local Tab = Window:MakeTab({
+    Name = "背上只因剑",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "巨型战士",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0SwordWarriors"))()
+end
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet(('https://gist.githubusercontent.com/blox-hub-roblox/021bad62bbc6a0adc4ba4e625f9ad7df/raw/c89af6e1acf587d09e4ce4bc7510e7100e0c0065/swordWarrior.lua'),true))()
+end
+})
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0SwordWarriors"))()
+end
+})   
+
+local Tab = Window:MakeTab({
+    Name = "法宝模拟器",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/Bd6R0GaC"))()
+end
+})         
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FreeRobloxScripts/anime-fighting/main/simulator"))()
+end
+})
+
+Tab:AddButton({  
+    Name = "3",
+	Callback = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/ohio/main/Roblox232"))()
+	end
+})local Tab = Window:MakeTab({
+    Name = "彩虹朋友",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+}) 
+
+Tab:AddButton({
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/JNHHGaming/Rainbow-Friends/main/Rainbow%20Friends"))()
+  end
+})
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Ihaveash0rtnamefordiscord/BorkWare/main/Scripts/' .. game.GameId .. ".lua"))(' Watermelon ? ')
+end
+})    
+
+local Tab = Window:MakeTab({
+    Name = "手臂摔跤模拟器",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KrzysztofHub/script/main/loader.lua"))()
+  end
+})
+
+local Tab = Window:MakeTab({
+    Name = "一路向西",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "快速抢劫",
+	Callback = function()
+loadstring(game:GetObjects("rbxassetid://10041726588")[1].Source)()
+end
+})    
+
+Tab:AddButton({
+	Name = "刷钱",
+	Callback = function()
+local Player = game:GetService("Players").LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:wait()
+local MaxLimit = game.Players.LocalPlayer.Stats.BagSizeLevel.CurrentAmount.Value
+
+while wait() do
+for i,v in pairs(game.Players.LocalPlayer.PlayerGui.InfoGui:GetDescendants()) do
+if v.Name == "Bag" and v.Visible == false then
+    Character.HumanoidRootPart.CFrame = game.Workspace.CashRegister.Open.CFrame
+    wait(1)
+repeat wait()
+game.Workspace.CashRegister.Active.Value = true
+game:GetService("ReplicatedStorage").GeneralEvents.Rob:FireServer("Register", { ["Part"]= workspace.CashRegister.Union, ["OpenPart"]= workspace.CashRegister.Open, ["ActiveValue"]= workspace.CashRegister.Active, ["Active"]= true })
+until game.Players.LocalPlayer.States.Bag.Value == MaxLimit
+    Character.HumanoidRootPart.CFrame = game.Workspace.Shops["OutlawGeneralStore1"].Head.ShopPart.CFrame
+end
+end
+end
+end
+}) 
+
+local Tab = Window:MakeTab({
+    Name = "河北唐县",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sw1ndlerScripts/RobloxScripts/main/Tang%20Country.lua"))()
+end
+})
+
+Tab:AddButton({
+	Name = "林(可刷钱)",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/linnblin/lin/main/lin"))()
+end
+}) 
+
+local Tab = Window:MakeTab({
+    Name = "鲨口求生",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+}) 
+
+Tab:AddButton({
+	Name = "杀鲨鱼",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sw1ndlerScripts/RobloxScripts/main/Misc%20Scripts/sharkbite2.lua",true))()
+  	end
+})
+
+local Tab = Window:MakeTab({
+	Name = "索尔的RNG",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Looser3itx/Hmmmmmmmmmmmmmmmmmmmmmmmmmmmm/main/loader.lua"))()
+  	end
+})
+
+local Tab = Window:MakeTab({
+	Name = "兵工厂",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+    Name = "1",
+    Callback = function()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
+    end
+})
+
+Tab:AddButton({
+    Name = "2",
+    Callback = function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/RandomAdamYT/DarkHub/master/Init'), true))()
+    end
+})
+
+local Tab = Window:MakeTab({
+    Name = "造船寻宝",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/urmomjklol69/GoldFarmBabft/main/GoldFarm.lua'),true))()
+end
+})    
+
+local Tab = Window:MakeTab({
+    Name = "感动星期五",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+  Name = "1",
+  Callback = function ()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ShowerHead-FluxTeam/scripts/main/funky-friday-autoplay'))()
+  end
+})
+
+local Tab = Window:MakeTab({
+    Name = "背上只因剑",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "巨型战士",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0SwordWarriors"))()
+end
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet(('https://gist.githubusercontent.com/blox-hub-roblox/021bad62bbc6a0adc4ba4e625f9ad7df/raw/c89af6e1acf587d09e4ce4bc7510e7100e0c0065/swordWarrior.lua'),true))()
+end
+})
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0SwordWarriors"))()
+end
+})   
+
+local Tab = Window:MakeTab({
+    Name = "法宝模拟器",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})  
+
+Tab:AddButton({
+	Name = "1",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/Bd6R0GaC"))()
+end
+})         
+
+Tab:AddButton({
+	Name = "2",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FreeRobloxScripts/anime-fighting/main/simulator"))()
+end
+})
+
+Tab:AddButton({  
+    Name = "3",
+	Callback = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/ohio/main/Roblox232"))()
+	end
+})
