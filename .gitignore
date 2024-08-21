@@ -146,7 +146,7 @@ Tab:AddTextbox({
 })
 
 Tab:AddTextbox({
-	Name = "墓前血量",
+	Name = "目前血量",
 	Default = "",
 	TextDisappear = true,
 	Callback = function(Value)
